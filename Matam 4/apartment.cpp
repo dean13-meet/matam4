@@ -1,22 +1,28 @@
+
+
+
 #include "apartment.h"
 
-static bool legalSquares(const SquareType** squares, int length, int width){
+bool Apartment::legalSquares(const Apartment::SquareType** &squares, int length,
+                             int width){
 	for (int i = 0; i < length; i++){
 		for (int j = 0; j < width; j++){
-			if(squares[i][j] != 'E' && squares[i][j] != 'W')
+            if(squares[i][j] != Apartment::EMPTY &&
+               squares[i][j] != Apartment::WALL)
 				return false;
 		}
 	}
 	return true;
 }
 
-Apartment (SquareType** squares, int len, int wid, int p)
+Apartment::Apartment (Apartment::SquareType ** &squares, int len, int wid,
+                      int p):
 	length(len), width(wid), price(p){
 	/***************************************************************************
-	if(!leagalSquares(squares&,length,width))
+     if any of the arguments is illegal:
+     throw an excption - illegalArgException
+     if(!leagalSquares(squares&,length,width))
 		return the excption
-	if any of the arguments is illegal:
-		throw an excption - illegalArgException
 	***************************************************************************/
 	//allocating enough memory for the apartment
 	apartment = new SquareType*[length];
@@ -30,13 +36,13 @@ Apartment (SquareType** squares, int len, int wid, int p)
 	}
 }
 
-Apartment (const Apartment copy_from){
+Apartment::Apartment (Apartment const &copy_from){
 	/***************************************************************************
 	if the argument is illegal: throw an excption - illegalArgException
 	***************************************************************************/
-	this->length = copy_from->length;
-	this->width = copy_from->width;
-	this->price = copy_from->price;
+	this->length = copy_from.length;
+	this->width = copy_from.width;
+	this->price = copy_from.price;
 	//allocating enough memory for the apartment
 	apartment = new SquareType*[this->length];
 	for (int i = 0; i < this->length; i++)
@@ -44,36 +50,36 @@ Apartment (const Apartment copy_from){
 	//init apartment using squares- can delegate a new function because of code duplication
 	for (int i = 0; i < this->length; i++){
 		for (int j = 0; j < this->width; j++){
-			apartment[i][j] = copy_from[i][j];
+			apartment[i][j] = copy_from.apartment[i][j];
 		}
 	}
 }
 
-~Apartment(){
+Apartment::~Apartment(){
 	for (int i = 0; i < length; i++)
 		delete[] apartment[i];
 	delete[] apartment;
 }
 
-int getTotalArea() const{
+int Apartment::getTotalArea() const{
 	int total_area = 0;
 	for (int i = 0; i < this->length; i++){
 		for (int j = 0; j < this->width; j++){
-			if(apartment[i][j] == 'E')
+            if(apartment[i][j] == Apartment::EMPTY)
 				total_area++;
 		}
 	}
 	return total_area;
 }
 
-int getPrice() const{
+int Apartment::getPrice() const{
 	return (this->price);
 }
 
-int getLength() const{
+int Apartment::getLength() const{
 	return (this->length);
 }
 
-int getWidth() const{
+int Apartment::getWidth() const{
 	return (this->width);
 }

@@ -5,22 +5,40 @@
 
 class Apartment
 {
+    
 public:
+    /* ~~~ Definitions ~~~ */
     class ApartmentException : public std::exception {};
     class IllegalArgException : public ApartmentException {};
     class OutOfApartmentBoundsException : public ApartmentException {};
 
     enum SquareType {EMPTY, WALL, NUM_SQUARE_TYPES};
-
-    Apartment (SquareType** squares, int length, int width, int price);
+    typedef enum SquareType SquareType;
+    
+    /* ~~~ Constructors ~~~ */
+    Apartment (SquareType** &squares, int length, int width, int price);
+    Apartment (Apartment const &copy_from); //copy constructor
+    
+    /* ~~~ Destructor ~~~ */
     ~Apartment();
-    int getTotalArea();
-    int getPrice();
-    int getLength();
-    int getWidth();
+    
+    /* ~~~ Assessors ~~~ */
+    int getTotalArea() const;
+    int getPrice() const;
+    int getLength() const;
+    int getWidth() const;
+    
+    /* ~~~ Operators ~~~ */
+    
+    
 private:
-	int length,width,price;
+    /* ~~~ Memebrs ~~~ */
+	int length, width, price;
 	SquareType** apartment;
+    
+    /* ~~~ Private Functions ~~~ */
+    static bool legalSquares(const Apartment::SquareType** &squares, int length,
+                             int width);
 };
 
 /*****************************
