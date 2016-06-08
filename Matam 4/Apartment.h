@@ -16,7 +16,7 @@ public:
     typedef enum SquareType SquareType;
     
     /* ~~~ Constructors ~~~ */
-    Apartment (SquareType** &squares, int length, int width, int price);
+    Apartment (SquareType** squares, int length, int width, int price);
     Apartment (Apartment const &copy_from); //copy constructor
     
     /* ~~~ Destructor ~~~ */
@@ -29,20 +29,25 @@ public:
     int getWidth() const;
     
     /* ~~~ Operators ~~~ */
-    
+    Apartment& operator=(const Apartment &apt);
+    SquareType& operator()(int r, int c);
+    const SquareType& operator()(int r, int c) const;
+    Apartment& operator+=(const Apartment& flat);
     
 private:
     /* ~~~ Memebrs ~~~ */
 	int length, width, price;
 	SquareType** apartment;
     
-    /* ~~~ Private Functions ~~~ */
-    static bool legalSquares(const Apartment::SquareType** &squares, int length,
-                             int width);
+    void destroySquares();
+    void copySquares(SquareType ** const& squares_from);
+    //copies squares_from to this.apt
+    
+    void checkBounds(int r, int c) const;
 };
 
-/*****************************
- * External operator function
- ****************************/
+/* ~~~ External Operators ~~~ */
+bool operator<(Apartment const& a, Apartment const& b); //friend not needed
+Apartment operator+(Apartment const& a, Apartment const& b);
 
 #endif //MTM4_APARTMENT_H
