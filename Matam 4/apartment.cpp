@@ -149,19 +149,15 @@ bool operator<(Apartment const& a, Apartment const& b)
     //assumes both a and b are valid - that is, they are apartments with price
     //and area
     
-    int a_p = a.getPrice();
-    int a_a = a.getTotalArea();
+    int apt1_price = a.getPrice();
+    int apt1_area = a.getTotalArea();
     
-    int b_p = b.getPrice();
-    int b_a = b.getTotalArea();
+    int apt2_price = b.getPrice();
+    int apt2_area = b.getTotalArea();
     
-    int r1 = a_p*b_a;
-    int r2 = b_p*a_a;
-    
-    if(r1 != r2)
-        return r1 < r2;
-    
-    return a_p < b_p;
+    return (apt1_price * apt2_area == apt2_price * apt1_area) ?
+    apt1_price<apt2_price :
+    apt1_price * apt2_area < apt2_price * apt1_area;
     
 }
 
@@ -170,24 +166,24 @@ bool operator<(Apartment const& a, Apartment const& b)
 
 Apartment& Apartment::operator+=(const Apartment& flat){
     int len = this->length, wid = this->width;
-    if(this->width == flat.width){
-        len += flat.length; /*put flat under the one we add to*/}
-    else if(this->length == flat.length){
-        wid += flat.width; /*put flat to the right of the one we add to*/}
-    else{/*put flat under the one we add to and beacause it's uneven sizes*/
+    if(this->width == flat.width){len += flat.length; /*under*/}
+    else if(this->length == flat.length){wid += flat.width; /*to the right*/}
+    else{/*put flat under the one we add to because it's uneven sizes*/
         len += flat.length;
         wid = wid>flat.width?wid:flat.width;}
     
     SquareType **newFlat = NULL;
     allocateSquares(newFlat, len, wid);
-
     for (int i = 0; i < len; i++){
         for (int j = 0; j < wid; j++){
-            if(j>=0 && j<this->width && i>=0 && i<this->length)
+            if(j<this->width && i<this->length)
                 newFlat[i][j] = this->apartment[i][j];
-            else if(j<flat.width && i>=this->length)
-                //meaning i is suitable for the second apartment
-                newFlat[i][j] = flat.apartment[i-this->length][j];
+            else if(len == this->length|| (i>=this->length&&j < flat.width))
+            {//going right (already out of original apt), or down&less than new
+                int adjustedI = i < this -> length ? i : i - this -> length;
+                int adjustedJ = len != this -> length ? j : j - this -> width;
+                newFlat[i][j] = flat.apartment[adjustedI][adjustedJ];
+            }
             else
                 newFlat[i][j] = Apartment::WALL;
     }}
