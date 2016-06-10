@@ -6,6 +6,52 @@
 
 using SquareType = Apartment::SquareType;
 
+//will make functions only available in this translation unit - aka static in c.
+namespace {
+    void allocateSquares (SquareType **& squares, int length, int width)
+    {
+        squares = new SquareType*[length];
+        for (int i = 0; i < length; i++)
+        {
+            try {
+                squares[i] = new SquareType[width];
+            } catch (std::bad_alloc& e) {//out of mem or anything else
+                for(int j = 0; j < i; j++)
+                {
+                    delete[] squares[i];
+                }
+                delete[] squares;
+                throw e;
+            }
+            
+        }
+    }
+    
+    void copySquares (SquareType ** const& squares_from,
+                      SquareType ** & squares_to, int length, int width)
+    {
+        ::allocateSquares(squares_to, length, width);
+        
+        //init apartment using squares
+        for (int i = 0; i < length; i++){
+            for (int j = 0; j < width; j++){
+                squares_to[i][j] = squares_from[i][j];
+            }
+        }
+    }
+    
+    void destroySquares(SquareType ** squares, int length, int width)
+    {
+        if(squares == NULL)
+            return;
+        
+        for (int i = 0; i < length; i++)
+            delete[] squares[i];
+        delete[] squares;
+        
+    }
+}
+
 Apartment::Apartment (SquareType **squares, int len, int wid, int p):
 apartment(NULL), length(len), width(wid), price(p){
     
@@ -15,39 +61,6 @@ apartment(NULL), length(len), width(wid), price(p){
     }
     
     copySquares(squares);
-}
-
-
-static void allocateSquares (SquareType **& squares, int length, int width)
-{
-    squares = new SquareType*[length];
-    for (int i = 0; i < length; i++)
-    {
-        try {
-            squares[i] = new SquareType[width];
-        } catch (std::bad_alloc& e) {//out of mem or anything else
-            for(int j = 0; j < i; j++)
-            {
-                delete[] squares[i];
-            }
-            delete[] squares;
-            throw e;
-        }
-        
-    }
-}
-
-static void copySquares (SquareType ** const& squares_from,
-                         SquareType ** & squares_to, int length, int width)
-{
-    ::allocateSquares(squares_to, length, width);
-    
-    //init apartment using squares
-    for (int i = 0; i < length; i++){
-        for (int j = 0; j < width; j++){
-            squares_to[i][j] = squares_from[i][j];
-        }
-    }
 }
 
 void Apartment::copySquares (SquareType ** const& squares_from)
@@ -102,17 +115,6 @@ SquareType& Apartment::operator()(int r, int c)
 
 Apartment::~Apartment(){
     destroySquares();
-}
-
-static void destroySquares(SquareType ** squares, int length, int width)
-{
-    if(squares == NULL)
-        return;
-    
-    for (int i = 0; i < length; i++)
-        delete[] squares[i];
-    delete[] squares;
-
 }
 
 void Apartment::destroySquares()

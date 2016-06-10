@@ -39,15 +39,15 @@ private:
 	int length, width, price;
 	SquareType** apartment;
     
-    void destroySquares();
+    void destroySquares();      //destroys apartment of this
     void copySquares(SquareType ** const& squares_from);
-    //copies squares_from to this.apt
+    //copies squares_from to this->aptartment
     
-    void checkBounds(int r, int c) const;
+    void checkBounds(int r, int c) const;   //checks if r,c is valid for the obj
 };
 
 /* ~~~ External Operators ~~~ */
 bool operator<(Apartment const& a, Apartment const& b); //friend not needed
-Apartment operator+(Apartment const& a, Apartment const& b);
+Apartment operator+(Apartment const& a, Apartment const& b);//friend not needed
 
 #endif //MTM4_APARTMENT_H
