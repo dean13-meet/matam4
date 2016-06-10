@@ -42,7 +42,7 @@ namespace {
     
     void destroySquares(SquareType ** squares, int length, int width)
     {
-        if(squares == NULL)
+        if(squares == nullptr)
             return;
         
         for (int i = 0; i < length; i++)
@@ -53,9 +53,9 @@ namespace {
 }
 
 Apartment::Apartment (SquareType **squares, int len, int wid, int p):
-apartment(NULL), length(len), width(wid), price(p){
+apartment(nullptr), length(len), width(wid), price(p){
     
-    if(squares == NULL || len <= 0 || wid <= 0 || p < 0)
+    if(squares == nullptr || len <= 0 || wid <= 0 || p < 0)
     {
         throw Apartment::IllegalArgException();
     }
@@ -69,7 +69,7 @@ void Apartment::copySquares (SquareType ** const& squares_from)
 }
 
 Apartment::Apartment (Apartment const &copy_from) :
-apartment(NULL), length(-1), width(-1), price(-1)
+apartment(nullptr), length(-1), width(-1), price(-1)
 {
     *this = copy_from;
 }
@@ -79,7 +79,7 @@ Apartment& Apartment::operator=(const Apartment &apt)
     if(this==&apt)
         return *this;
     
-    SquareType ** temp = NULL;
+    SquareType ** temp = nullptr;
     ::copySquares(apt.apartment, temp, apt.length, apt.width);
     
     //free old data:
@@ -174,7 +174,7 @@ Apartment& Apartment::operator+=(const Apartment& flat){
         len += flat.length;
         wid = wid>flat.width?wid:flat.width;}
     
-    SquareType **newFlat = NULL;
+    SquareType **newFlat = nullptr;
     allocateSquares(newFlat, len, wid);
     for (int i = 0; i < len; i++){
         for (int j = 0; j < wid; j++){
