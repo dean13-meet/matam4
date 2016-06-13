@@ -45,9 +45,6 @@ int main(int argc, const char * argv[]) {
 
     setup;
     
-    
-    
-    
     price = 7;
     length = 5;
     width = 5;

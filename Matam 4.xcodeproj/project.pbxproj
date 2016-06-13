@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D43C8FC1D0858ED000383D0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43C8FB1D0858ED000383D0 /* main.cpp */; };
-		3D43C9041D08595B000383D0 /* apartment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43C9031D08595B000383D0 /* apartment.cpp */; };
+		3D43C9041D08595B000383D0 /* Apartment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43C9031D08595B000383D0 /* Apartment.cpp */; };
 		3D43C9071D0A146C000383D0 /* MtmTst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D43C9051D0A146C000383D0 /* MtmTst.cpp */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		3D43C8F81D0858ED000383D0 /* Matam 4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Matam 4"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D43C8FB1D0858ED000383D0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3D43C9021D085952000383D0 /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
-		3D43C9031D08595B000383D0 /* apartment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apartment.cpp; sourceTree = "<group>"; };
+		3D43C9031D08595B000383D0 /* Apartment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Apartment.cpp; sourceTree = "<group>"; };
 		3D43C9051D0A146C000383D0 /* MtmTst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MtmTst.cpp; sourceTree = "<group>"; };
 		3D43C9061D0A146C000383D0 /* MtmTst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MtmTst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +65,7 @@
 			children = (
 				3D43C8FB1D0858ED000383D0 /* main.cpp */,
 				3D43C9021D085952000383D0 /* Apartment.h */,
-				3D43C9031D08595B000383D0 /* apartment.cpp */,
+				3D43C9031D08595B000383D0 /* Apartment.cpp */,
 				3D43C9051D0A146C000383D0 /* MtmTst.cpp */,
 				3D43C9061D0A146C000383D0 /* MtmTst.h */,
 			);
@@ -128,7 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D43C9041D08595B000383D0 /* apartment.cpp in Sources */,
+				3D43C9041D08595B000383D0 /* Apartment.cpp in Sources */,
 				3D43C9071D0A146C000383D0 /* MtmTst.cpp in Sources */,
 				3D43C8FC1D0858ED000383D0 /* main.cpp in Sources */,
 			);

@@ -36,8 +36,8 @@ public:
     
 private:
     /* ~~~ Memebrs ~~~ */
+    SquareType** apartment;
 	int length, width, price;
-	SquareType** apartment;
     
     void destroySquares();      //destroys apartment of this
     void copySquares(SquareType ** const& squares_from);
